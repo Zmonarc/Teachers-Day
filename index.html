@@ -55,16 +55,19 @@ body{margin:0;padding:20px;background:linear-gradient(135deg,#fff7ed,#ffe9ef,#f7
 <h1 class="title">HAPPY <span>TEACHERS' DAY!</span></h1>
 <p>For every lesson, every word of encouragement, every patient explanation, and every moment you believed in us — thank you.</p>
 </div>
-<div class="actions"><button class="btn" id="surprise">🎁 Open My Message</button><button class="btn alt" id="celebrate">🎉 Celebrate!</button></div>
+<div class="actions"><button class="btn" id="surprise">🎁 Open My Message</button><button class="btn alt" id="celebrate">🎉 Celebrate!</button><button class="btn alt" id="sound" aria-pressed="true">🔊 Sound: On</button></div>
 <div class="message" id="message"></div>
 </section>
 
 <section class="section">
-<h2 class="heading"><span>Three little reminders</span>Why Teachers Are Special 💖</h2>
+<h2 class="heading"><span>Six little reminders</span>Why Teachers Are Special 💖</h2>
 <div class="notes">
 <button class="card" data-message="🌟 You inspire us to dream bigger and believe that we can achieve more than we imagined."><span class="big">🌟</span><strong>You Inspire</strong><small>You turn curiosity into confidence.</small></button>
 <button class="card" data-message="📚 Every lesson you teach becomes part of the knowledge and memories we carry forward."><span class="big">📚</span><strong>You Teach</strong><small>Your lessons stay with us.</small></button>
 <button class="card" data-message="❤️ Your patience and kindness can make even difficult days feel a little easier."><span class="big">❤️</span><strong>You Care</strong><small>You make students feel seen.</small></button>
+<button class="card" data-message="💪 You believe in us when we're unsure, and that belief gives us the courage to keep trying."><span class="big">💪</span><strong>You Encourage</strong><small>You help us keep going.</small></button>
+<button class="card" data-message="🧭 You point us in the right direction and trust us to find our own path, and that guidance means the world."><span class="big">🧭</span><strong>You Guide</strong><small>You show us the way forward.</small></button>
+<button class="card" data-message="🌱 Because of your time and effort, we grow a little wiser, braver, and kinder every day."><span class="big">🌱</span><strong>You Help Us Grow</strong><small>You nurture who we become.</small></button>
 </div>
 </section>
 
@@ -80,6 +83,39 @@ body{margin:0;padding:20px;background:linear-gradient(135deg,#fff7ed,#ffe9ef,#f7
 <script>
 const app=document.getElementById("app"),message=document.getElementById("message"),giftmsg=document.getElementById("giftmsg");
 function show(el,text){el.textContent=text;el.classList.add("show")}
+
+/* ---------- Sounds (synthesized with Web Audio, no files needed) ---------- */
+let audioCtx=null,soundOn=true;
+function getCtx(){
+if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;if(AC)audioCtx=new AC()}
+if(audioCtx&&audioCtx.state==="suspended")audioCtx.resume();
+return audioCtx;
+}
+function tone(freq,start,dur,type="sine",vol=.15){
+if(!soundOn)return;
+const c=getCtx();if(!c)return;
+const o=c.createOscillator(),g=c.createGain(),t=c.currentTime+start;
+o.type=type;o.frequency.value=freq;
+g.gain.setValueAtTime(0,t);
+g.gain.linearRampToValueAtTime(vol,t+.02);
+g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+o.connect(g);g.connect(c.destination);
+o.start(t);o.stop(t+dur+.05);
+}
+const sounds={
+message(){[523.25,659.25,783.99].forEach((f,i)=>tone(f,i*.12,.55))},
+card(){tone(660,0,.15,"triangle");tone(880,.08,.22,"triangle")},
+gift(){[784,988,1175,1568].forEach((f,i)=>tone(f,i*.09,.5,"sine",.12))},
+celebrate(){[523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,i*.1,.4,"triangle",.14))},
+toggle(){tone(600,0,.12)}
+};
+function play(name){if(soundOn)sounds[name]()}
+document.getElementById("sound").onclick=function(){
+soundOn=!soundOn;
+this.textContent=soundOn?"🔊 Sound: On":"🔇 Sound: Off";
+this.setAttribute("aria-pressed",soundOn);
+play("toggle");
+};
 const surpriseMessages=[
 "💌 Dear Teacher, thank you for being a guide, a mentor, and a source of encouragement. Your effort makes a lasting difference. Happy Teachers' Day! ❤️",
 "🌷 Thank you for every lesson, every reminder, and every little word of encouragement. You help us become better every day.",
@@ -87,18 +123,37 @@ const surpriseMessages=[
 "📚 Behind every lesson is a teacher who gives time, patience, and effort. Thank you for everything you do for your students.",
 "💖 Your kindness can turn a difficult day into a hopeful one. Thank you for always giving us another reason to believe in ourselves.",
 "🌟 You don't just teach subjects—you help shape dreams, confidence, and futures. Happy Teachers' Day!",
-"🍎 Thank you for your patience when we don't understand, your encouragement when we struggle, and your happiness when we succeed."
+"🍎 Thank you for your patience when we don't understand, your encouragement when we struggle, and your happiness when we succeed.",
+"🌻 You planted seeds of knowledge in us, and thanks to your care, we keep growing every day. Happy Teachers' Day!",
+"🕯️ A good teacher lights the way for others. Thank you for being the light that guides us when things feel unclear.",
+"💛 Thank you for believing in us even when we doubted ourselves. Your faith in us means more than words can say.",
+"🎓 Every achievement we reach carries a piece of your hard work. We are grateful to have learned from you.",
+"🌈 Thank you for making the classroom a place where we feel safe to ask questions, make mistakes, and try again.",
+"🤝 You are more than a teacher—you are a mentor, a guide, and a friend. Thank you for always being there for us.",
+"🦋 The lessons you gave us will help us fly higher in the future. Thank you for giving us wings.",
+"🏆 To the teacher who works quietly behind every success story: you are a true hero. Happy Teachers' Day!",
+"📝 Thank you for the extra time, the late-night checking, and the countless little things you do that we may not always see.",
+"🌍 Teachers shape the world one student at a time. Thank you for shaping ours with so much love and dedication."
 ];
 let surpriseIndex=0;
 document.getElementById("surprise").onclick=()=>{
 show(message,surpriseMessages[surpriseIndex]);
+play("message");
 surpriseIndex=(surpriseIndex+1)%surpriseMessages.length;
 };
+const celebrateMessages=[
+"🎊 Today we celebrate YOU! Thank you for every lesson, every smile, and every moment of patience. You are appreciated! 🌸✨",
+"🎉 Hooray for the best teacher! Today is all about you and everything you do for your students. 💐",
+"🥳 Let's celebrate the people who make learning magical. Happy Teachers' Day, and thank you for all you give! ✨",
+"🌟 Cheers to you! Your hard work, kindness, and dedication make a difference every single day. 🍎",
+"🎈 Today the spotlight is on you. Thank you for being the teacher we will always remember! 💖"
+];
 document.getElementById("celebrate").onclick=()=>{
-show(message,"🎊 Today we celebrate YOU! Thank you for every lesson, every smile, and every moment of patience. You are appreciated! 🌸✨");
+show(message,celebrateMessages[Math.floor(Math.random()*celebrateMessages.length)]);
+play("celebrate");
 for(let i=0;i<18;i++){const s=document.createElement("span");s.textContent=["🌸","✨","💖","⭐","🎉"][i%5];s.style.cssText=`position:absolute;left:${5+Math.random()*90}%;top:${35+Math.random()*15}%;font-size:22px;pointer-events:none;z-index:3;animation:conf 1s ease-out forwards;animation-delay:${i*.035}s`;document.querySelector(".hero").appendChild(s);setTimeout(()=>s.remove(),1500)}
 };
-document.querySelectorAll(".card").forEach(b=>b.onclick=()=>show(message,b.dataset.message));
+document.querySelectorAll(".card").forEach(b=>b.onclick=()=>{show(message,b.dataset.message);play("card")});
 const giftMessages=[
 "🎁 You deserve all the appreciation in the world! Thank you for shaping futures, inspiring dreams, and making learning meaningful. 💐❤️",
 "💐 This little gift carries a big THANK YOU for all the patience, kindness, and dedication you give every day.",
@@ -106,11 +161,21 @@ const giftMessages=[
 "🌸 Your lessons may end when class is over, but the things you teach us can stay for a lifetime. Thank you!",
 "⭐ Every student you encourage is a story you helped make brighter. Thank you for being part of our journey.",
 "❤️ No gift could truly match the time and effort you give your students. Please know that you are deeply appreciated.",
-"🌈 Thank you for helping us find our confidence, learn from our mistakes, and look forward to what comes next."
+"🌈 Thank you for helping us find our confidence, learn from our mistakes, and look forward to what comes next.",
+"🍫 Something sweet for the one who makes learning so much more enjoyable. Thank you for everything!",
+"🌹 Just like a flower needs sunlight, students need teachers like you to grow. Thank you for shining on us.",
+"🧸 Wrapped inside is a big hug and a bigger thank you for your warmth, kindness, and patience.",
+"☀️ You brighten our days, even the cloudy ones. Thank you for being such a positive part of our lives.",
+"🎈 May your day be as joyful as the happiness you bring to your students. Happy Teachers' Day!",
+"💫 Your words of wisdom will stay with us long after we leave the classroom. Thank you for every one of them.",
+"🏅 Gold medal for the most patient, caring, and inspiring teacher. You truly deserve it!",
+"🌺 We may forget some lessons, but we will never forget the teacher who made us feel capable. Thank you!",
+"🎶 Thank you for turning ordinary days into learning adventures. Our hearts are full of gratitude for you."
 ];
 let giftIndex=0;
 function openGift(){
 show(giftmsg,giftMessages[giftIndex]);
+play("gift");
 giftIndex=(giftIndex+1)%giftMessages.length;
 }
 document.getElementById("gift").onclick=openGift;
