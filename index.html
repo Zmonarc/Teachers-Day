@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Teachers' Day</title>
+<style>
+:root{--ink:#40323a;--muted:#75636b;--pink:#d86f91;--cream:#fffaf1}
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:linear-gradient(135deg,#fff7ed,#ffe9ef,#f7e9ff);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+#app{max-width:736px;margin:auto}
+.hero{position:relative;overflow:hidden;border-radius:30px;padding:30px 18px 34px;background:linear-gradient(150deg,#fff9ef,#ffe9ef 52%,#f7e9ff);border:1px solid #ecd9df;text-align:center}
+.top{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:17px}
+.ribbon{padding:7px 14px;border-radius:999px;background:#fff;border:1px solid #ead9de;font-size:12px;font-weight:900;letter-spacing:1px;color:#9b5c70}
+.board{position:relative;margin:0 auto 22px;max-width:590px;padding:27px 18px 30px;border-radius:20px;background:linear-gradient(135deg,#314f4a,#263e3b);border:8px solid #b87948;box-shadow:inset 0 0 0 2px #172c29,0 8px 0 #a56d43}
+.board:after{content:"";position:absolute;bottom:-23px;left:50%;width:115px;height:11px;transform:translateX(-50%);background:#b87948;border-radius:8px}
+.board small{display:block;color:#e9dba7;font-weight:700;letter-spacing:2px;margin-bottom:8px}
+.teacher{font-size:57px;margin-bottom:4px;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{50%{transform:rotate(3deg) translateY(-5px)}}
+.title{margin:0;color:#fffdf1;font-family:Georgia,serif;font-size:clamp(39px,9vw,68px);line-height:.92;text-shadow:2px 3px 0 #162a28}
+.title span{display:block;color:#ffd879}
+.board p{margin:17px auto 0;color:#e7eee7;max-width:510px;line-height:1.55;font-size:15px}
+.chalk{position:absolute;font-size:22px;opacity:.75}.c1{left:12px;top:12px}.c2{right:12px;top:12px}.c3{left:17px;bottom:14px}.c4{right:17px;bottom:14px}
+.decor{position:absolute;inset:0;pointer-events:none}.flower{position:absolute;font-size:27px;animation:float 4s ease-in-out infinite}
+.f1{left:4%;top:17%}.f2{right:4%;top:20%;animation-delay:1s}.f3{left:7%;bottom:12%;animation-delay:1.8s}.f4{right:7%;bottom:10%;animation-delay:2.5s}
+@keyframes float{50%{transform:translateY(-11px) rotate(6deg)}}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{min-height:46px;padding:12px 19px;border:0;border-radius:999px;background:var(--pink);color:#fff;font-weight:850;cursor:pointer;font-size:14px;transition:.18s}
+.btn.alt{background:#fff;color:#8c5366;border:1px solid #e5cbd3}.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px #8e53652b}
+.message{display:none;margin:18px auto 0;max-width:580px;padding:17px 18px;border-radius:18px;background:#fff3bc;border:1px solid #ecd88d;color:#665321;font-weight:750;line-height:1.5}
+.message.show{display:block;animation:pop .3s ease}@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.section,.gift{margin-top:18px;padding:23px 18px;border-radius:25px;background:var(--cream);border:1px solid #eadfd5}
+.heading{text-align:center;margin:0 0 15px;font-size:23px}.heading span{display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#9a7781;margin-bottom:4px}
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.card{border:1px solid #eadde2;background:#fff;border-radius:19px;padding:17px 10px;text-align:center;cursor:pointer;min-height:128px;transition:.18s;font:inherit;color:inherit}
+.card:hover{transform:translateY(-4px) rotate(-1deg)}.card:nth-child(2):hover{transform:translateY(-4px) rotate(1deg)}
+.card .big{font-size:31px;display:block;margin-bottom:7px}.card strong{font-size:14px}.card small{display:block;margin-top:5px;color:var(--muted);line-height:1.3}
+.gift{text-align:center;padding:25px 16px;background:linear-gradient(135deg,#fff,#fff0f4);border-color:#efd9df}
+.giftbox{font-size:65px;cursor:pointer;display:inline-block;transition:.25s}.giftbox:hover{transform:scale(1.1) rotate(-4deg)}
+.gift h2{margin:6px 0 5px;font-size:22px}.gift p{margin:0;color:var(--muted);font-size:14px}
+.footer{text-align:center;padding:19px 8px 5px;color:#8a727b;font-size:13px}
+@keyframes conf{to{transform:translateY(120px) rotate(180deg);opacity:0}}
+@media(max-width:520px){.notes{grid-template-columns:1fr}.card{min-height:auto}.hero{padding-left:12px;padding-right:12px}.board{border-width:6px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+<section class="hero">
+<div class="decor"><span class="flower f1">🌸</span><span class="flower f2">🌼</span><span class="flower f3">🌷</span><span class="flower f4">🌺</span></div>
+<div class="top"><span class="ribbon">OCTOBER 5 • TEACHERS' DAY</span><span class="ribbon">💛 WITH GRATITUDE</span></div>
+<div class="board">
+<span class="chalk c1">✦</span><span class="chalk c2">♡</span><span class="chalk c3">✎</span><span class="chalk c4">✦</span>
+<div class="teacher">👩‍🏫</div><small>A SPECIAL MESSAGE FOR</small>
+<h1 class="title">HAPPY <span>TEACHERS' DAY!</span></h1>
+<p>For every lesson, every word of encouragement, every patient explanation, and every moment you believed in us — thank you.</p>
+</div>
+<div class="actions"><button class="btn" id="surprise">🎁 Open My Message</button><button class="btn alt" id="celebrate">🎉 Celebrate!</button></div>
+<div class="message" id="message"></div>
+</section>
+
+<section class="section">
+<h2 class="heading"><span>Three little reminders</span>Why Teachers Are Special 💖</h2>
+<div class="notes">
+<button class="card" data-message="🌟 You inspire us to dream bigger and believe that we can achieve more than we imagined."><span class="big">🌟</span><strong>You Inspire</strong><small>You turn curiosity into confidence.</small></button>
+<button class="card" data-message="📚 Every lesson you teach becomes part of the knowledge and memories we carry forward."><span class="big">📚</span><strong>You Teach</strong><small>Your lessons stay with us.</small></button>
+<button class="card" data-message="❤️ Your patience and kindness can make even difficult days feel a little easier."><span class="big">❤️</span><strong>You Care</strong><small>You make students feel seen.</small></button>
+</div>
+</section>
+
+<section class="gift">
+<div class="giftbox" id="gift">🎁</div>
+<h2>A Little Gift For You</h2>
+<p>Tap the gift box to reveal a special thank-you.</p>
+<div class="message" id="giftmsg"></div>
+</section>
+<div class="footer">🌷 Thank you for helping us grow, learn, and believe in ourselves. 🌷</div>
+</div>
+
+<script>
+const app=document.getElementById("app"),message=document.getElementById("message"),giftmsg=document.getElementById("giftmsg");
+function show(el,text){el.textContent=text;el.classList.add("show")}
+const surpriseMessages=[
+"💌 Dear Teacher, thank you for being a guide, a mentor, and a source of encouragement. Your effort makes a lasting difference. Happy Teachers' Day! ❤️",
+"🌷 Thank you for every lesson, every reminder, and every little word of encouragement. You help us become better every day.",
+"✨ A great teacher leaves a mark that lasts far beyond the classroom. Thank you for inspiring us to keep learning and growing.",
+"📚 Behind every lesson is a teacher who gives time, patience, and effort. Thank you for everything you do for your students.",
+"💖 Your kindness can turn a difficult day into a hopeful one. Thank you for always giving us another reason to believe in ourselves.",
+"🌟 You don't just teach subjects—you help shape dreams, confidence, and futures. Happy Teachers' Day!",
+"🍎 Thank you for your patience when we don't understand, your encouragement when we struggle, and your happiness when we succeed."
+];
+let surpriseIndex=0;
+document.getElementById("surprise").onclick=()=>{
+show(message,surpriseMessages[surpriseIndex]);
+surpriseIndex=(surpriseIndex+1)%surpriseMessages.length;
+};
+document.getElementById("celebrate").onclick=()=>{
+show(message,"🎊 Today we celebrate YOU! Thank you for every lesson, every smile, and every moment of patience. You are appreciated! 🌸✨");
+for(let i=0;i<18;i++){const s=document.createElement("span");s.textContent=["🌸","✨","💖","⭐","🎉"][i%5];s.style.cssText=`position:absolute;left:${5+Math.random()*90}%;top:${35+Math.random()*15}%;font-size:22px;pointer-events:none;z-index:3;animation:conf 1s ease-out forwards;animation-delay:${i*.035}s`;document.querySelector(".hero").appendChild(s);setTimeout(()=>s.remove(),1500)}
+};
+document.querySelectorAll(".card").forEach(b=>b.onclick=()=>show(message,b.dataset.message));
+const giftMessages=[
+"🎁 You deserve all the appreciation in the world! Thank you for shaping futures, inspiring dreams, and making learning meaningful. 💐❤️",
+"💐 This little gift carries a big THANK YOU for all the patience, kindness, and dedication you give every day.",
+"🎀 If gratitude could be wrapped in a box, this would be filled with it. Thank you for being an amazing teacher!",
+"🌸 Your lessons may end when class is over, but the things you teach us can stay for a lifetime. Thank you!",
+"⭐ Every student you encourage is a story you helped make brighter. Thank you for being part of our journey.",
+"❤️ No gift could truly match the time and effort you give your students. Please know that you are deeply appreciated.",
+"🌈 Thank you for helping us find our confidence, learn from our mistakes, and look forward to what comes next."
+];
+let giftIndex=0;
+function openGift(){
+show(giftmsg,giftMessages[giftIndex]);
+giftIndex=(giftIndex+1)%giftMessages.length;
+}
+document.getElementById("gift").onclick=openGift;
+</script>
+</body>
+</html>
